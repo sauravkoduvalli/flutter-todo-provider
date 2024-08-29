@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_provider/provider/counter/counter_provider.dart';
+import 'package:todo_provider/screens/todo_screen.dart';
 import 'package:todo_provider/widgets/todo_card.dart';
 
+class Todo {
+  const Todo({
+    required this.title,
+    required this.readStatus,
+  });
+  final String title;
+  final bool readStatus;
+}
+
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
+
+  final List<Todo> todoList = [
+    Todo(title: "title1", readStatus: true),
+    Todo(title: "title2", readStatus: true),
+    Todo(title: "title3", readStatus: false),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +36,25 @@ class HomeScreen extends StatelessWidget {
               return true;
             }
           }
+
           return TodoCard(
-            title: 'Title ${index+1}',
-            readStatus: readStatusFun(),
+            title: todoList[index].title,
+            readStatus: todoList[index].readStatus,
             onStatusChange: (value) {
               print(value);
+            },
+            onTodoTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => TodoScreen(title: todoList[index].title),
+                ),
+              );
             },
           );
         },
         separatorBuilder: (context, index) => const Divider(),
-        itemCount: 20,
+        itemCount: todoList.length,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.read<Counter>().increment(),
