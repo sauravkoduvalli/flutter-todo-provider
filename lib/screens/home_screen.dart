@@ -17,9 +17,9 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
   final List<Todo> todoList = [
-    Todo(title: "title1", readStatus: true),
-    Todo(title: "title2", readStatus: true),
-    Todo(title: "title3", readStatus: false),
+    const Todo(title: "title1", readStatus: true),
+    const Todo(title: "title2", readStatus: true),
+    const Todo(title: "title3", readStatus: false),
   ];
 
   @override
@@ -29,14 +29,6 @@ class HomeScreen extends StatelessWidget {
       body: ListView.separated(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         itemBuilder: (context, index) {
-          bool readStatusFun() {
-            if (index % 2 == 0) {
-              return false;
-            } else {
-              return true;
-            }
-          }
-
           return TodoCard(
             title: todoList[index].title,
             readStatus: todoList[index].readStatus,

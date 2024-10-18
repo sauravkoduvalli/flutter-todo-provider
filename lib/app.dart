@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo_provider/theme/dark_theme.dart';
+import 'package:todo_provider/theme/light_theme.dart';
 
 import 'screens/home_screen.dart';
 
@@ -10,14 +12,8 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Todo Provider',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.deepPurple,
-          foregroundColor: Colors.white,
-        ),
-      ),
+      theme: lightTheme,
+      darkTheme: darkTheme,
       home: HomeScreen(),
     );
   }
